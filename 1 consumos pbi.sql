@@ -1,5 +1,12 @@
 
-SELECT A.FECHA_VALOR
+SELECT 
+    A.CODIGO_ARTICULO || ' ' || (SELECT DESCRIP_COMERCIAL FROM ARTICULOS ART WHERE ART.CODIGO_ARTICULO = B.CODIGO_ARTICULO) D_ARTICULO_SUZ,
+    (select f.descripcion  from familias f where f.numero_tabla = '1' and f.codigo_familia = B.codigo_familia and f.codigo_empresa = '001') as d_codigo_familia,
+    (select f.descripcion  from familias f where f.numero_tabla = '2' and f.codigo_familia = B.codigo_estad2 and f.codigo_empresa = '001') as d_codigo_subfamilia,
+    (select descripcion from familias where numero_tabla = '3' AND codigo_familia = B.codigo_estad3 AND codigo_empresa = '001') clasificacion,
+    (select descripcion from familias where numero_tabla = '7' AND codigo_familia = B.codigo_estad7 AND codigo_empresa = '001') tipo_material,
+    (select descripcion from familias where numero_tabla = '8' AND codigo_familia = B.codigo_estad8 AND codigo_empresa = '001') mercado,
+    A.FECHA_VALOR
     ,A.CODIGO_EMPRESA
     ,A.CODIGO_ALMACEN
     ,A.CODIGO_ARTICULO
